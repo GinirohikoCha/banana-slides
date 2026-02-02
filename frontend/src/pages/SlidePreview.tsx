@@ -167,6 +167,11 @@ export const SlidePreview: React.FC = () => {
 
     // 添加键盘事件监听器
     const handleKeyDown = (e: KeyboardEvent) => {
+      const activeElement = document.activeElement as HTMLElement;
+      if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA' || activeElement.isContentEditable)) {
+        return;
+      }
+
       if (!currentProject || currentProject.pages.length === 0) return;
 
       switch (e.key) {
